@@ -40,6 +40,7 @@ local parse_slides = function(lines)
       if #current_slide.title > 0 then
         table.insert(slides.slides, current_slide)
       end
+
       current_slide = {
         title = line,
         body = {},
@@ -47,7 +48,6 @@ local parse_slides = function(lines)
     else
       table.insert(current_slide.body, line)
     end
-    table.insert(current_slide, line)
   end
   table.insert(slides.slides, current_slide)
 
@@ -219,6 +219,8 @@ M.start_presentation = function(opts)
   set_slide_content(state.current_slide)
 end
 
-M.start_presentation({ bufnr = 10 })
+-- M.start_presentation({ bufnr = 10 })
+
+M._parse_slides = parse_slides
 
 return M
